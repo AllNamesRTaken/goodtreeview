@@ -1,6 +1,6 @@
 {
   "name": "goodtreeview",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A good Treeview for the goodcore tree data structure",
   "main": "TreeView.js",
   "dependencies": {},
