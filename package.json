@@ -11,8 +11,10 @@
   "devDependencies": {
     "@babel/core": "^7.7.2",
     "@babel/preset-env": "^7.7.1",
+    "@types/gulp": "^4.0.6",
     "cssnano": "^4.1.10",
     "goodcore": "0.33.17",
+    "gulp": "^4.0.2",
     "lighterhtml": "^2.0.9",
     "rimraf": "3.0.0",
     "typescript": "^3.7.2"
@@ -20,7 +22,7 @@
   "scripts": {
     "start": "parcel src/index.html",
     "build": "rimraf ./dist && parcel build --experimental-scope-hoisting src/TreeView.ts && parcel build --experimental-scope-hoisting src/TreeViewIntegrated.ts && tsc -p tsconfig.dts.json",
-    "deploy": "npm publish dist"
+    "deploy": "gulp package && publish dist"
   },
   "author": "Joel Brage",
   "license": "MIT"
