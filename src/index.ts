@@ -8,20 +8,27 @@ export interface NodeData {
 }
 
 interface ITreeData { id: string, parent: string | null, data: { kind: Kind } };
-    let treeData = [
-        { id: "root", parent: null, data: { kind: "frame" as Kind, collapsed: "expanded" } },
-        { id: "n1", parent: "root", data: { kind: "frame" as Kind, collapsed: "expanded" } },
-        { id: "n2", parent: "root", data: { kind: "frame" as Kind, collapsed: "collapsed" } },
-        { id: "n3", parent: "n1", data: { kind: "control" as Kind, collapsed: "off" } },
-        { id: "n4", parent: "n1", data: { kind: "control" as Kind, collapsed: "off" } },
-        { id: "n5", parent: "n2", data: { kind: "control" as Kind, collapsed: "off" } },
-    ];
+let treeData = [
+    { id: "root", parent: null, data: { kind: "frame" as Kind, collapsed: "expanded" } },
+    { id: "n1", parent: "root", data: { kind: "frame" as Kind, collapsed: "expanded" } },
+    { id: "n2", parent: "root", data: { kind: "frame" as Kind, collapsed: "collapsed" } },
+    { id: "n3", parent: "n1", data: { kind: "control" as Kind, collapsed: "off" } },
+    { id: "n4", parent: "n1", data: { kind: "control" as Kind, collapsed: "off" } },
+    { id: "n5", parent: "n2", data: { kind: "control" as Kind, collapsed: "off" } },
+];
+for(let i = 0; i < 1000; i++) {
+    treeData.push({ id: "dyn"+i, parent: "n2", data: { kind: "control" as Kind, collapsed: "off" } })
+}
 let myTree = Tree.fromNodeList<ITreeData, NodeData>(treeData, {id: "id"});
+function rowRenderer<T>(subtree: Tree<T>) {
+    let template = lighterhtml.html`<span class='tv-col'>${subtree.id}</span>`;
+    return lighterhtml.html`${[0,1,2,3,4,5,6,7,8,9].map(() => template)}`;
+}
 let view = new TreeView({
     id: "mytree", 
     tree: myTree, 
     renderer: (subtree, childViews) => lighterhtml.html`
-        <span class=${["innerdesc", "tree_" + subtree.data?.kind].join(" ")} data-kind=${subtree.data?.kind} >${subtree.id}</span>
+        <span class=${["innerdesc", "tree_" + subtree.data?.kind].join(" ")} data-kind=${subtree.data?.kind} >${rowRenderer(subtree)}</span>
         ${childViews}
     `,
     onclick: (subtree, event) => {
@@ -42,8 +49,5 @@ let view = new TreeView({
     getCollapseState: (subtree) => subtree.data?.collapsed ?? "off",
 });
 view.render(document.body);
-let n2 = myTree.children![1]!;
-n2.cut();
-myTree.insertAt(0, n2);
 (window as any).myTree = myTree;
 (window as any).view = view;

@@ -125,13 +125,10 @@ export class TreeView<T> {
         if(event.shiftKey) {
           this.moveActiveDown()
         } else {
-          if(is(".haschildren.expanded", active!)) {
-            find(".treenode", active!)!.focus();
-          } else {
-            let next = this.findNextVisibleTreeNode(active!);
-            next?.focus();
-          }
+          let next = this.findNextVisibleTreeNode(active!);
+          next?.focus();
         }
+        event.preventDefault();
         break;
       case "arrowup":
         if(event.shiftKey) {
@@ -140,6 +137,7 @@ export class TreeView<T> {
           let prev = this.findPrevVisibleTreeNode(active!);
           prev?.focus();
         }
+        event.preventDefault();
         break;
       case "arrowright":
         if(event.shiftKey) {
@@ -156,6 +154,7 @@ export class TreeView<T> {
             this.activeSubTree && this.setCollapseState(this.activeSubTree, "expanded");
           }
         }
+        event.preventDefault();
         break;
       case "arrowleft":
         if(event.shiftKey) {
@@ -172,6 +171,7 @@ export class TreeView<T> {
             this.activeSubTree && this.setCollapseState(this.activeSubTree, "collapsed");
           }
         }
+        event.preventDefault();
         break;
       case " ":
         break;
@@ -283,14 +283,23 @@ export class TreeView<T> {
     return result;
   }
   private findNextVisibleTreeNode(active: HTMLElement): HTMLElement | null {
+    let result: HTMLElement | null = null;
+    if(is(".haschildren.expanded", active!)) {
+      result = find(".treenode", active!);
+    } else {
+      result = this.findNextVisibleSiblingOrParent(active);
+    }
+    return result;
+  }
+  private findNextVisibleSiblingOrParent(active: HTMLElement): HTMLElement | null {
+    let result: HTMLElement | null = null;
     let nextSibling = active.nextElementSibling?.nextElementSibling as HTMLElement
-    let result = null;
-    if (nextSibling) {
+    if (nextSibling && nextSibling.classList.contains("treenode")) {
       result = nextSibling;
     } else {
       let parentTreeNode = findParent(active, ".treenode");
       if(parentTreeNode) {
-        result = this.findNextVisibleTreeNode(parentTreeNode);
+        result = this.findNextVisibleSiblingOrParent(parentTreeNode);
       }
     }
     return result;
@@ -299,7 +308,12 @@ export class TreeView<T> {
     let result = active;
     let prev = active.previousElementSibling?.previousElementSibling as HTMLElement;
     if (prev?.classList.contains("treenode")) {
-      result = prev;
+      if(is(".haschildren.expanded", prev)) {
+        let nodes = findAll(".treenode", prev);
+        result = nodes[nodes.length - 1];
+      } else {
+        result = prev;
+      }
     } else {
       let parentTreeNode = findParent(active, ".treenode");
       if (parentTreeNode) {

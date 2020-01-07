@@ -50,23 +50,33 @@
 }
 .treenode.collapsed>.innernode::before {
     content: "▸";
-    display: inline-block;
+    display: block;
     position: relative;
     width: 1em;
+    height: 1em;
+    float: left;
 }
 .treenode.expanded>.innernode::before {
     content: "▾";
-    display: inline-block;
+    display: block;
     position: relative;
     width: 1em;
+    height: 1em;
+    float: left;
 }
 .treenode.expanded > .innernode > .treenode.auto > .innernode::before {
     content: "";
-    display: inline-block;
+    display: block;
     position: relative;
     width: 1em;
+    height: 1em;
+    float: left;
 }
 .innernode>.innerdesc::after {
     content: " (" attr(data-kind) ")";
     font-size: 0.8em;
+}
+.tv-col {
+    border: 1px solid black;
+    padding: 5px;
 }
