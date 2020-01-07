@@ -1,0 +1,72 @@
+.tree>.treenode:first-child {
+    padding-left: 0;
+}
+
+.treenode {
+    position: relative;
+    display: block;
+}
+.treenode > .innernode {
+    display: inline-block;
+    position: relative;
+    padding-top: 0.4em;
+    padding-left: 0.6em;
+}
+.innernode > .innerdesc {
+    position: relative;
+    display: inline-block;
+}
+.treenode:focus {
+    outline: none;
+}
+.treenode:focus > .innernode > .innerdesc {
+    outline: 1px dashed orangered;
+    background-color: #ff450069;
+}
+.beforenode, .afternode {
+    height: 0.4em;
+    display: block;
+    position: relative;
+    z-index: 1;
+}
+.afternode {
+    margin-top: -0.2em;
+}
+.beforenode {
+    margin-bottom: -0.2em;
+}
+.dropover > .innernode > .innerdesc {
+    color: rgb(206, 22, 114);
+}
+.dropover::before {
+    content: "⇨";
+    display: inline-block;
+    position: absolute;
+    color: rgb(182, 0, 0);
+    bottom: -0.4em;
+}
+.dragged {
+    opacity: 0.5;
+}
+.treenode.collapsed>.innernode::before {
+    content: "▸";
+    display: inline-block;
+    position: relative;
+    width: 1em;
+}
+.treenode.expanded>.innernode::before {
+    content: "▾";
+    display: inline-block;
+    position: relative;
+    width: 1em;
+}
+.treenode.expanded > .innernode > .treenode.auto > .innernode::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    width: 1em;
+}
+.innernode>.innerdesc::after {
+    content: " (" attr(data-kind) ")";
+    font-size: 0.8em;
+}

@@ -1,0 +1,85 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "no-reserved-keywords": true,
+        "deprecation": true,
+        "one-variable-per-declaration": false,
+		"curly": true, 
+        "ban-types": false, 
+		"whitespace": [true, "check-branch", "check-decl", "check-separator", "check-operator"], 
+		"space-before-function-paren": [false, {"named": "always", "method": "always", "constructor": "never", "anonymous": "always", "asyncArrow": "never"}], 
+        "variable-name": [
+            true,
+			"ban-keywords", 
+            "allow-leading-underscore",
+			"allow-trailing-underscore"
+        ],
+        "max-classes-per-file": {"severity": "off"},
+        "no-trailing-whitespace": false,
+        "trailing-comma": [
+            false
+        ],
+        "object-literal-sort-keys": false,
+        "no-bitwise": false,
+        "no-console": [
+            false
+        ],
+        "only-arrow-functions": [
+            false
+        ],
+        "member-ordering": [
+            false
+        ],
+        "indent": [
+            true, "tabs"
+        ],
+        "no-shadowed-variable": false,
+        "no-conditional-assignment": false,
+        "class-name": true, 
+        "no-empty": false,
+        "no-unused-expression": false,
+        "comment-format": [
+            false
+        ],
+        "max-line-length": {"options": 
+            {
+                "limit": 140
+            }, 
+            "severity": "warn"
+        },
+        "prefer-for-of": false,
+        "prefer-const": false,
+		"no-var-keyword": true,
+		"no-sparse-arrays": true,
+		"no-switch-case-fall-through": true,
+		"no-unused-new": true,
+		"no-unsafe-any": {"severity": "warning"},
+		"restrict-plus-operands": {"severity": "error"},
+		"switch-default": true,
+		"triple-equals": true,
+		"linebreak-style": [true, "CRLF"],
+		"arrow-parens": true,
+		"arrow-return-shorthand": true,
+		"interface-over-type-literal": true,
+		"no-angle-bracket-type-assertion": true,
+		"prefer-method-signature": true,
+        "prefer-template": [true, "allow-single-concat"],
+        "ordered-imports": [
+            false
+        ],
+		"quotemark": [
+			true,
+			"double",
+			"avoid-escape"
+		],
+		"semicolon": [
+			true,
+			"always"
+		]
+    },
+    "rulesDirectory": ["tslint-microsoft-contrib"]
+}
