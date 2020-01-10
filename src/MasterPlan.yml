@@ -1,0 +1,19 @@
+- Use IndexedTree to support quickly finding a node based on the row number.
+- Extend Tree and IndexedTree with Take(x) to loop over the current and following x-1 nodes in order to have a vertical viewport
+- Use Depth() to get indentation on viewport nodes. (Optimize in Tree later)
+- Let RowInfo be a Partial property of data containing: (optimize later into separate structure in a dictionary keyed on node id)
+  - RowKind = "d"
+  - (Collapse)State = "off"
+  - Freeze = 0
+  - Height = [DEFAULT_HEIGHT]
+- Let ColInfo[] be a Partial property of data containing: (optimize later into separate structure in a dictionary keyed on node id and cell index)
+  - Name = ""
+  - Header = true
+  - Pos = "auto"
+  - Width = [DEFAULT_WIDTH]
+  - Filter = false
+  - DataType = "auto"
+- Make TreeView render the whole table to ViewPort
+- Make TreeView render visible rows of ViewPort to Dom
+- Add Headers (table on top of table ?)
+- Add Column Freeze (position absolute + overflow-x scroll)

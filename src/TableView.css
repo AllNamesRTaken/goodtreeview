@@ -1,0 +1,48 @@
+.tv-row {
+    position: relative;
+    display: block;
+}
+.tv-row > .tv-col {
+    display: inline-block;
+    position: relative;
+}
+.tv-col > .innerdesc {
+    position: relative;
+    display: inline-block;
+}
+.tv-row:focus {
+    outline: none;
+}
+.tv-row:focus > .tv-col > .innerdesc {
+    background-color: #ff450069;
+}
+.tv-row.collapsed>.tv-col::before {
+    content: "▸";
+    display: block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    float: left;
+}
+.tv-row.expanded>.tv-col::before {
+    content: "▾";
+    display: block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    float: left;
+}
+.tv-row.expanded > .tv-col > .tv-row.auto > .tv-col::before {
+    content: "";
+    display: block;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    float: left;
+}
+.tv-col {
+    border: 1px solid black;
+    padding: 5px;
+    display: inline-block;
+    width: 50px;
+}
